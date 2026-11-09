@@ -9,6 +9,6 @@ def diff_snapshots(old_snap, new_snap):
     for path in old_files & new_files:
         old_h = old_snap["files"][path].get("hash")
         new_h = new_snap["files"][path].get("hash")
-        if old_h != new_h:
+        if old_h and new_h and old_h != new_h:
             modified.append(path)
     return added, removed, modified
