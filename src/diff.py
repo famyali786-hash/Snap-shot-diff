@@ -12,3 +12,11 @@ def diff_snapshots(old_snap, new_snap):
         if old_h and new_h and old_h != new_h:
             modified.append(path)
     return added, removed, modified
+
+import difflib
+
+def line_diff(old_text: str, new_text: str):
+    old_lines = old_text.splitlines(keepends=True)
+    new_lines = new_text.splitlines(keepends=True)
+    matcher = difflib.SequenceMatcher(None, old_lines, new_lines, autojunk=False)
+    return []
