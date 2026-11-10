@@ -1,10 +1,8 @@
 """CLI menu interface."""
 import os
-import json
-from src.snapshot import take_snapshot
-from src.diff import diff_snapshots
+from src.file_compare import file_status
 
-SNAP_DIR = os.path.join(os.path.dirname(__file__), "..", "snapshots")
-
-def list_snapshots():
-    return [f for f in os.listdir(SNAP_DIR) if f.endswith(".json")] if os.path.exists(SNAP_DIR) else []
+def compare_files_cli():
+    old = input("Old: ").strip()
+    new = input("New: ").strip()
+    print(f"Status: {file_status(old, new)}")
