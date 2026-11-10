@@ -1,7 +1,10 @@
 """CLI menu interface."""
+import os
+from src.snapshot import take_snapshot
 
-def show_menu():
-    print("=== File System Snapshot Tool ===")
+SNAP_DIR = os.path.join(os.path.dirname(__file__), "..", "snapshots")
 
-if __name__ == "__main__":
-    show_menu()
+def take_snapshot_cli():
+    folder = input("Folder: ").strip()
+    name = input("Name: ").strip()
+    take_snapshot(folder, os.path.join(SNAP_DIR, name))
