@@ -14,3 +14,8 @@ def build_snapshot_from_zip(zip_bytes):
 MAX_FILE_SIZE_MB = 50
 def is_text(data):
     return b"\x00" not in data[:8192]
+
+import json
+import os
+SNAPSHOT_DIR = "snapshots"
+os.makedirs(SNAPSHOT_DIR, exist_ok=True)
