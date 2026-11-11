@@ -1,21 +1,17 @@
-import io
-import zipfile
-import hashlib
-
-def build_snapshot_from_zip(zip_bytes):
-    files_data = {}
-    with zipfile.ZipFile(io.BytesIO(zip_bytes)) as zf:
-        for info in zf.infolist():
-            if not info.is_dir():
-                raw = zf.read(info.filename)
-                files_data[info.filename] = {"size": len(raw), "hash": hashlib.md5(raw).hexdigest()}
-    return files_data, []
-
-MAX_FILE_SIZE_MB = 50
-def is_text(data):
-    return b"\x00" not in data[:8192]
-
-import json
 import os
+import json
+from datetime import datetime
+import streamlit as st
+
 SNAPSHOT_DIR = "snapshots"
-os.makedirs(SNAPSHOT_DIR, exist_ok=True)
+
+@st.cache_data(show_spinner=False)
+def list_snapshots():
+    snaps = []
+    if not os.path.exists(SNAPSHOT_DIR):
+        return snaps
+    for f in os.listdir(SNAPSHOT_DIR):
+        if f.endswith(".json"):
+            path = os.path.join(SNAPSHOT_DIR, f)
+            snaps.append({"name": f, "date": datetime.fromtimestamp(os.stat(path).st_mtime)})
+    return sorted(snaps, key=lambda x: x["date"], reverse=True)
