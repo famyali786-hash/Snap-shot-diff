@@ -15,3 +15,5 @@ def list_snapshots():
             path = os.path.join(SNAPSHOT_DIR, f)
             snaps.append({"name": f, "date": datetime.fromtimestamp(os.stat(path).st_mtime)})
     return sorted(snaps, key=lambda x: x["date"], reverse=True)
+
+# Snapshot history table rendering
