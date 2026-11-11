@@ -1,12 +1,12 @@
-import streamlit as st
+import io
+import zipfile
 import hashlib
 
-def get_hash(data):
-    return hashlib.md5(data).hexdigest()
-
-def build_snapshot_from_uploads(uploaded_files):
+def build_snapshot_from_zip(zip_bytes):
     files_data = {}
-    for uf in uploaded_files:
-        raw = uf.read()
-        files_data[uf.name] = {"size": len(raw), "hash": get_hash(raw)}
-    return files_data
+    with zipfile.ZipFile(io.BytesIO(zip_bytes)) as zf:
+        for info in zf.infolist():
+            if not info.is_dir():
+                raw = zf.read(info.filename)
+                files_data[info.filename] = {"size": len(raw), "hash": hashlib.md5(raw).hexdigest()}
+    return files_data, []
