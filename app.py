@@ -10,3 +10,7 @@ def build_snapshot_from_zip(zip_bytes):
                 raw = zf.read(info.filename)
                 files_data[info.filename] = {"size": len(raw), "hash": hashlib.md5(raw).hexdigest()}
     return files_data, []
+
+MAX_FILE_SIZE_MB = 50
+def is_text(data):
+    return b"\x00" not in data[:8192]
