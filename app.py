@@ -19,3 +19,5 @@ def list_snapshots():
 # Snapshot history table rendering
 
 # Snapshot download button
+
+# Delete snapshot action
