@@ -17,3 +17,5 @@ def list_snapshots():
     return sorted(snaps, key=lambda x: x["date"], reverse=True)
 
 # Snapshot history table rendering
+
+# Snapshot download button
