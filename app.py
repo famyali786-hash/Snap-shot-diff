@@ -31,3 +31,5 @@ def build_diff_table(diff_lines):
     return f"<table>{rows}</table>"
 
 # Style diff table
+
+# Compare files UI
