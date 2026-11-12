@@ -29,3 +29,5 @@ def build_diff_table(diff_lines):
     for d in diff_lines:
         rows += f"<tr><td>{d['line']}</td></tr>"
     return f"<table>{rows}</table>"
+
+# Style diff table
