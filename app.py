@@ -23,3 +23,9 @@ def list_snapshots():
 # Delete snapshot action
 
 # Snapshot diff view
+
+def build_diff_table(diff_lines):
+    rows = ""
+    for d in diff_lines:
+        rows += f"<tr><td>{d['line']}</td></tr>"
+    return f"<table>{rows}</table>"
