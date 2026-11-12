@@ -21,3 +21,5 @@ def list_snapshots():
 # Snapshot download button
 
 # Delete snapshot action
+
+# Snapshot diff view
